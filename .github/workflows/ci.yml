@@ -1,0 +1,20 @@
+name: gauntlet
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Unit tests + VK lints (true positive and no false positive)
+        run: cargo test --release
+      - name: Lint the forgeable fixture (must exit non-zero = UNSOUND)
+        run: |
+          cargo build --release
+          if ./target/release/gauntlet lint fixtures/forgeable_vk.json; then
+            echo "ERROR: forgeable VK passed the lints"; exit 1
+          else
+            echo "OK: forgeable VK correctly flagged UNSOUND"
+          fi
+      - name: Lint the honest fixture (must exit zero)
+        run: ./target/release/gauntlet lint fixtures/honest_vk.json
