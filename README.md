@@ -55,8 +55,8 @@ applied to this bounty for $49,440. Its `lib/compile.js` runs `snarkjs groth16
 setup` and never runs `snarkjs zkey contribute`, so every verifier it generates
 has `delta == gamma == G2 generator`. The script forges a proof asserting
 `isAdult = 7` and shows a verifier built from that key — running on the real
-PolkaVM runtime and on an EVM — accepting it. The grantee's own demo deploys
-exactly this key to Polkadot Asset Hub.
+PolkaVM runtime and on an EVM — accepting it. The SDK's own demo app ships a
+verifier built from exactly this kind of key.
 
 See [`FINDINGS.md`](./FINDINGS.md).
 
