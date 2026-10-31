@@ -1,6 +1,9 @@
-# Finding F1 (live-exploited): zk-polka-sdk generates universally-forgeable verifiers
+# Finding F1: zk-polka-sdk's default build generates universally-forgeable verifiers
 
-**Severity:** critical (soundness — anyone can mint a valid proof for any statement).
+**Severity:** critical *bug class* (soundness — a verifier built from such a key accepts
+a valid-looking proof of any statement with no witness). We have **not** confirmed a
+deployment built from this SDK that holds value; the point is that its default output is
+forgeable and happy-path coverage does not catch it.
 **Status:** disclosed to the authors on 2026-10-24 as
 [jatinsahijwani/zk-polka-sdk#1](https://github.com/jatinsahijwani/zk-polka-sdk/issues/1)
 (the repo has GitHub private vulnerability reporting turned off, so it went in as a public issue).
